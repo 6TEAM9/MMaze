@@ -48,5 +48,5 @@ void Maze::print() {
 }
 
 void Maze::generate() {
-	///TODO: Implement
+	///TODO: Implemet. Started.
 }
