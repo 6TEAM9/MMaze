@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 
+using namespace std;
+
 const int debug = 1;
 
 const char EMPTY = 0;
@@ -27,7 +29,7 @@ template <class T> class Queue {
 	T *a;
 	int head;
 	int tail;
-
+	///TODO: implement or remove
 };
 
 class Maze {
