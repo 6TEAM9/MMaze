@@ -25,6 +25,7 @@ struct Segment {
 	Point value(Point pivot);
 	void cut_left_off(Point pivot);
 	void cut_right_off(Point pivot);
+	Point intersection(Segment second);
 };
 
 class Horizon{

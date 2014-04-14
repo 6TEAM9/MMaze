@@ -12,17 +12,14 @@ const char FILLED = 1;
 struct Cell{
 	int row;
 	int col;
-	Cell(int _row, int _col) {
-		row = _row;
-		col = _col;
-	}
+	Cell(int _row, int _col);
 };
 
 const Cell DIRS[4] = {
-	{1, 0},
-	{0, 1},
-	{-1, 0},
-	{0, -1}
+	Cell(1, 0),
+	Cell(0, 1),
+	Cell(-1, 0),
+	Cell(0, -1)
 };
 
 template <class T> class Queue {

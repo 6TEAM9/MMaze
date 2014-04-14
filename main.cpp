@@ -18,20 +18,17 @@ int main()
 
 	h.add(Segment(-0.4, 0, 0.2, 0));
 
-/*
-
 	while (true) {
 		Segment s(-1., -1., 1., 1.);
 		printf("s : ");
 		s.write(stdout);
 		printf("\n enter pivot : ");
-		Point p(0, 0);
-		p.read(stdin);
-		p.write(stdout);
+		Point cut(0, 0);
+		cut.read(stdin);
+		cut.write(stdout);
 		printf("\n");
-		Point res = s.value(p);
+		Point res = s.value(cut);
 		res.write(stdout);
 		printf("\n");
 	}
-	*/
 }

@@ -35,12 +35,7 @@ void Segment::write(FILE *fout) {
 }
 
 Point Segment::value(Point pivot) {
-	if (pivot.x < left.x) {
-		return left;
-	}
-	if (pivot.x > right.x) {
-		return right;
-	}
+	///TODO: safe version
 	Point res(
 			pivot.x,
 			((right.x - pivot.x) * left.y
@@ -58,6 +53,22 @@ void Segment::cut_left_off(Point pivot) {
 
 void Segment::cut_right_off(Point pivot) {
 	right = value(pivot);
+}
+
+Point Segment::intersection(Segment s)
+{
+	///TODO: Safe intersection
+	Point res(0, 0);
+	float left_dy = s.left.y - value(s.left).y;
+	float right_dy = s.right.y - value(s.right).y;
+	res.x = (
+			right_dy * s.left.x
+					-
+			right_dy * s.right.x)
+					/
+			(right_dy - left_dy);
+	res = value(res);
+	return res;
 }
 
 Horizon::Horizon(Segment _bound):

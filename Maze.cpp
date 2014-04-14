@@ -1,7 +1,11 @@
 #include "Maze.h"
 
+Cell::Cell(int _row, int _col):
+		row(_row), col(_col) {}
+
+
 Maze::Maze(int rows, int cols):
-		m_size(rows, cols)
+		m_size(rows, cols), m_f(NULL)
 {
 	m_f = new char *[m_size.row * 2 + 1];
 	for (int i = 0; i < m_size.row * 2 + 1; i++) {
