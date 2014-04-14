@@ -5,13 +5,6 @@
 #include <ctime>
 #include <cstdlib>
 
-Cell::Cell(int _row, int _col):
-		row(_row), col(_col) {}
-
-
-Maze::Maze(int rows, int cols):
-		m_size(rows, cols), m_f(NULL) {}
-
 using namespace std;
 
 #define up 0

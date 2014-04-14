@@ -3,33 +3,7 @@
 #include <vector>
 #include <fstream>
 
-
 using namespace std;
-
-const int debug = 1;
-
-const char EMPTY = 0;
-const char FILLED = 1;
-
-struct Cell{
-	int row;
-	int col;
-	Cell(int _row, int _col);
-};
-
-const Cell DIRS[4] = {
-	Cell(1, 0),
-	Cell(0, 1),
-	Cell(-1, 0),
-	Cell(0, -1)
-};
-
-template <class T> class Queue {
-	T *a;
-	int head;
-	int tail;
-	///TODO: implement or remove
-};
 
 class Maze
 {

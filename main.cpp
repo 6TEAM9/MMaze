@@ -8,7 +8,7 @@ BeautyBorder BB;
 int main()
 {
 	Maze my_maze(3, 3);
-	my_maze.print();
+	my_maze.print('X', '0');
 	Horizon h(Segment(-1., -1., 1., 1.));
   h.d_erase();
   h.d_push(Segment(-1., 0.5, -0.5, 0.));
