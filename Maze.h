@@ -1,6 +1,8 @@
-#ifndef MAZE_H_INCLUDED
+#ifndef MAZE_H
+#define MAZE_H
+#include <vector>
+#include <fstream>
 
-#include <stdio.h>
 
 using namespace std;
 
@@ -29,14 +31,29 @@ template <class T> class Queue {
 	///TODO: implement or remove
 };
 
-class Maze {
-	Cell m_size;
-	char **m_f;
+class Maze
+{
+private:
+    bool isGenerated, isLoaded;
+    int n, m, startX, startY;
+    vector< vector< bool > > used;
+    vector< vector< bool > > direction[4];
+    vector< vector< bool > > field;
+    pair< int, int > delta[4];
+    void bfs(int x, int y);
+    void dfs(int x, int y);
+    void makeEdge(int x, int y, int dir);
+    void makeField();
 public:
-	Maze(int rows = 0, int cols = 0);
-	const Cell& getSize();
-	void print();
-	void generate();
+    Maze();
+    Maze(int n, int m);
+    Maze(char *filename);
+    virtual ~Maze();
+    void generate(int way);
+    void setStartPos(int inx, int iny);
+    void print(char emptycell, char wall);
+    void saveToFile(char *filename, char emptycell, char wall);
+    bool isFilled(int inx, int iny);
 };
 
-#endif // MAZE_H_INCLUDED
+#endif // MAZE_H
