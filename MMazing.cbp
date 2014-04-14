@@ -35,6 +35,8 @@
 		<Unit filename="ASCII Border.txt" />
 		<Unit filename="BeautyBorder.cpp" />
 		<Unit filename="BeautyBorder.h" />
+		<Unit filename="Horizon.cpp" />
+		<Unit filename="Horizon.h" />
 		<Unit filename="Labyrinth Border.txt" />
 		<Unit filename="Maze.cpp" />
 		<Unit filename="Maze.h" />
