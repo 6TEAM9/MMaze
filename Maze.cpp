@@ -83,6 +83,11 @@ void Maze::setStartPos(int inx, int iny)
     startX = inx, startY = iny;
 }
 
+void Maze::bfs(int x, int y)
+{
+    /// TODO
+}
+
 void Maze::dfs(int x, int y)
 {
     used[x][y] = true;
