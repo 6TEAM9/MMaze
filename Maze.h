@@ -26,13 +26,15 @@ private:
     public:
         int operator[](int j);
     };
-    void bfs(int x, int y);
+    void bfs();
+    void sfs();
     void dfs(int x, int y);
     void makeEdge(int x, int y, int dir);
     void makeField();
 public:
     Maze();
     Maze(int n, int m);
+    Maze(int n, int m, int startX, int startY);
     Maze(char *filename);
     virtual ~Maze();
     void generate(int way);
