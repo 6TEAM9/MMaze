@@ -58,17 +58,20 @@ void Segment::cut_right_off(Point pivot) {
 Point Segment::intersection(Segment s)
 {
 	///TODO: Safe intersection
+	///TODO: find bug
 	Point res(0, 0);
 	float left_dy = s.left.y - value(s.left).y;
 	float right_dy = s.right.y - value(s.right).y;
-	res.x = (
-			right_dy * s.left.x
-					-
-			right_dy * s.right.x)
-					/
-			(right_dy - left_dy);
+	float k1 = right_dy * s.left.x;
+	float k2 = left_dy * s.right.x;// I will never copypaste code any more!
+	float norm = (right_dy - left_dy);
+	res.x = (k1 - k2) / norm;
 	res = value(res);
 	return res;
+}
+
+float Segment::rise(Point pivot) {
+	return pivot.y - value(pivot).y;
 }
 
 Horizon::Horizon(Segment _bound):
@@ -79,7 +82,8 @@ Horizon::Horizon(Segment _bound):
 
 void Horizon::clear() {
 	outline.clear();
-	outline.push_back(Segment(bound.left.x, 0, bound.right.x, 0));
+	///TODO: remove after debug
+	outline.push_back(Segment(bound.left.x, 0, bound.right.x, 0.5));
 }
 
 void Horizon::add(Segment s) {
@@ -124,7 +128,62 @@ void Horizon::add(Segment s) {
 		right_bound->write(stdout);
 		printf("\n");
 	}
-	///TODO: merge and split implement
+
+	///TODO: add epsilon
+	if (left_bound == right_bound) {
+		float rise_left = it->rise(s.left);
+		float rise_right = it->rise(s.right);
+		Point fracture_left(0, 0);
+		Point fracture_right(0, 0);
+		if (rise_left > 0) {
+			fracture_left = s.left;
+			if (rise_right > 0) {
+				fracture_right = s.right;
+			} else {
+	 			fracture_right = it->intersection(s);
+			}
+		} else {
+			if (rise_right > 0) {
+				fracture_left = it->intersection(s);
+				fracture_right = s.right;
+			} else {
+				fracture_left = it->value(s.left);
+				fracture_right = it->value(s.right);
+			}
+		}
+
+		// fracture!
+		{
+			Segment cliff_left(*it);
+			Segment cliff_right(*it);
+			Segment cliff_center(fracture_left, fracture_right);
+
+			cliff_left.cut_right_off(fracture_left);
+			cliff_right.cut_left_off(fracture_right);
+
+			*it = cliff_right;
+			outline.insert(it, cliff_left);
+			outline.insert(it, cliff_center);
+			return;
+		}
+	}
+
+	printf("Not done yet!\n");
+
+	it = left_bound;
+	// left bound fracture
+	{
+
+	}
+}
+
+void Horizon::print() {
+	///WTF: cannot put this inside the loop
+	list<Segment>::iterator it = outline.begin();
+	for (; it != outline.end(); it++) {
+		it->write(stdout);
+		printf("\n");
+	}
 }
 
 void Horizon::d_erase() {

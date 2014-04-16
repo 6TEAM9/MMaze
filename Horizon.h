@@ -26,6 +26,7 @@ struct Segment {
 	void cut_left_off(Point pivot);
 	void cut_right_off(Point pivot);
 	Point intersection(Segment second);
+	float rise(Point pivot);
 };
 
 class Horizon{
@@ -35,6 +36,7 @@ public:
 	Horizon(Segment _bound);
 	void clear();
 	void add(Segment s);
+	void print();
 	void d_erase();
 	void d_push(Segment s);
 };
