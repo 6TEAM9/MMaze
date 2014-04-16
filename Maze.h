@@ -3,24 +3,38 @@
 #include <vector>
 #include <fstream>
 
+
 using namespace std;
 
 class Maze
 {
 private:
+    friend class Tmp;
     bool isGenerated, isLoaded;
     int n, m, startX, startY;
     vector< vector< bool > > used;
     vector< vector< bool > > direction[4];
     vector< vector< bool > > field;
     pair< int, int > delta[4];
-    void bfs(int x, int y);
+    class Tmp
+    {
+        Maze *maze;
+        int i;
+        Tmp();
+        Tmp(Maze *maze, int i);
+        friend class Maze;
+    public:
+        int operator[](int j);
+    };
+    void bfs();
+    void sfs();
     void dfs(int x, int y);
     void makeEdge(int x, int y, int dir);
     void makeField();
 public:
     Maze();
     Maze(int n, int m);
+    Maze(int n, int m, int startX, int startY);
     Maze(char *filename);
     virtual ~Maze();
     void generate(int way);
@@ -28,6 +42,7 @@ public:
     void print(char emptycell, char wall);
     void saveToFile(char *filename, char emptycell, char wall);
     bool isFilled(int inx, int iny);
+    Tmp operator[](int i);
 };
 
 #endif // MAZE_H
